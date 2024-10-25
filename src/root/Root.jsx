@@ -4,8 +4,8 @@ import Header from "../components/header/Header";
 
 export default function Root() {
   return (
-    <div>
-      <header>
+    <div className=" bg-gray-50 w-full ">
+      <header className=" bg-gray-50 ">
         <Header />
       </header>
 

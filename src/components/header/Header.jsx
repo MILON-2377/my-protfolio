@@ -30,7 +30,7 @@ export default function Header() {
         ))}
       </div>
 
-      <div>
+      <div className=" sm:block hidden ">
         <Link >
             <Button text={"Let's talk"} />
         </Link>
