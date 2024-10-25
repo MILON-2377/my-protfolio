@@ -1,3 +1,5 @@
+
+
 export const Skills = [
   {
     title: "JavaScript",
@@ -78,3 +80,4 @@ export const Skills = [
       "Adept at analyzing problems and implementing effective solutions in software development.",
   },
 ];
+
