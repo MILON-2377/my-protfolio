@@ -10,7 +10,7 @@ function App() {
       <div className=" w-full flex lg:flex-row flex-col lg:w-[80%] lg:mx-auto ">
         <Banner />
 
-        <div className=" lg:w-[50%] px-5 mt-20 ">
+        <div className=" lg:w-[50%] px-5 mt-5 lg:mt-20 ">
           <SkillSlider />
           <div className=" flex sm:flex-row flex-col gap-5 mt-5 ">
             <About t1={"more about me"} t2={"Credentials"} img={signature} />

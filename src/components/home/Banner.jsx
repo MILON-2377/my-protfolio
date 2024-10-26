@@ -1,11 +1,15 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import img from "../../assets/_MG_2631_-_Copy-removebg-preview.png";
 import HoverCircle from "../hover/HoverCircle";
 
 export default function Banner() {
   const [hover, setHover] = useState(false);
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, scale: 0.5 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1, ease: "easeInOut" }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       className=" flex flex-col sm:flex-row rounded-3xl f p-8 w-[90%] lg:w-[50%] sm:w-[95%] mt-10 sm:mt-20 mx-auto bg-white  "
@@ -35,6 +39,6 @@ export default function Banner() {
           <HoverCircle hover={hover} />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

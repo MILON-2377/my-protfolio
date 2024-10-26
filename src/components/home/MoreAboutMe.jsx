@@ -6,12 +6,13 @@ export default function About({ t1, t2, img }) {
   const [hover, setHover] = useState(false);
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 0, scale: 0 }}
       whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      className=" rounded-3xl bg-white p-5 h-[30vh] w-full "
+      className={` rounded-3xl bg-white p-5 sm:h-[35vh] h-[30vh]
+         w-full `}
     >
       <img
         src={img}
@@ -34,7 +35,14 @@ export default function About({ t1, t2, img }) {
           </p>
         </div>
 
-        <HoverCircle cls={t2==="Projects" ? " sm:-right-[28vw] lg:-right-[9.5vw] sm:top-6 -top-8 " : " -top-8 sm:-right-[23vw] lg:-right-28 sm:top-6 "} hover={hover} />
+        <HoverCircle
+          cls={
+            t2 === "Projects"
+              ? " sm:-right-[28vw] lg:-right-[9.5vw] sm:top-6 -top-8 "
+              : " -top-8 sm:-right-[23vw] lg:-right-28 sm:top-6 "
+          }
+          hover={hover}
+        />
       </div>
     </motion.div>
   );
