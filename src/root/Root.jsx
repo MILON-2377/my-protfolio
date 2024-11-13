@@ -1,22 +1,20 @@
 import { Outlet } from "react-router-dom";
-import Header from "../components/header/Header";
-import Footer from "../components/footer/Footer";
+import SidebarMode from "../components/sidebars/SidebarMode";
+import SideNavigate from "../components/sidebars/SideNavigate";
 
 
 export default function Root() {
   return (
-    <div className=" bg-gray-50 w-full ">
-      <header className=" bg-gray-50 ">
-        <Header />
-      </header>
+    <div className=" w-full lg:flex ">
+      <div className=" h-14 fixed top-0 w-full lg:static lg:h-screen bg-white  ">
+        <SidebarMode />
+      </div>
 
-      {/* main section */}
       <Outlet />
 
-      {/* footer */}
-      <footer >
-        <Footer />
-      </footer>
+
+      {/* sidebar bottom */}
+      <SideNavigate />
     </div>
   )
 }
