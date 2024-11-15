@@ -84,7 +84,7 @@ export default function AboutProfile() {
 
       {AimatedText()}
 
-      <p className=" text-xm text-slate-500 font-semibold mt-5 ">
+      <p className=" text-xm lg:w-[70%] text-slate-500 font-semibold mt-5 ">
         {aboutData.introduction}
       </p>
 
