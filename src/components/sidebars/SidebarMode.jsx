@@ -3,15 +3,16 @@ import { FaCartPlus } from "react-icons/fa";
 import { useState } from "react";
 import { FaLastfm } from "react-icons/fa";
 
+
 export default function SidebarMode() {
   const [isDark, setIsDark] = useState(false);
   return (
-    <div className=" flex items-center justify-between px-3 py-2 shadow-sm ">
+    <div className=" flex flex-row lg:flex-col items-center justify-between lg:justify-normal lg:gap-5 px-3 py-2 shadow-sm ">
       <button className=" w-8 h-8 rounded-full bg-blue-400 flex items-center justify-center  ">
         <FaLastfm className=" text-white text-xl " />
       </button>
 
-      <div className=" flex items-center gap-3 ">
+      <div className=" flex flex-row lg:flex-col items-center gap-3 ">
         <button className=" w-8 h-8 rounded-full bg-blue-400 flex items-center justify-center  ">
           <FaCartPlus className={`text-white`} />
         </button>
