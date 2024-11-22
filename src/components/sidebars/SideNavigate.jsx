@@ -43,7 +43,7 @@ const NavLinks = [
 export default function SideNavigate() {
   const location = useLocation();
   return (
-    <div className=" h-14 sm:text-xl  w-full flex lg:flex-col flex-row lg:h-screen lg:w-full items-center  justify-between lg:items-start lg:justify-normal lg:gap-5 ">
+    <div className=" bg-slate-50 h-14 sm:text-xl  w-full flex lg:flex-col flex-row lg:h-screen lg:w-full items-center  justify-between lg:items-start lg:justify-normal lg:gap-5 ">
       {NavLinks.map((i, idx) => (
         <Link
           key={i.name + idx}

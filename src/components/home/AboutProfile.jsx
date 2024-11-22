@@ -1,92 +1,118 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import HoverButton from "../buttons/HoverButton";
+import ReadMoreBtn from "./ReadMoreBtn";
 
-const aboutData = {
-  name: "Milon Miah",
-  profession: "Software Engineer &",
-  specialization: "Scalable Web Applications",
-  introduction:
-    "Hi, I’m Milon Miah, a software engineer and freelancer passionate about crafting scalable and high-performance web applications. Explore my blog for insights, dive into my project portfolio to see innovation in action, and check out my online resume to learn more about my journey.",
-  links: {
-    blog: "https://example.com/blog",
-    portfolio: "https://example.com/portfolio",
-    resume: "https://example.com/resume",
-  },
-};
+const names = [
+  "Software Engineering Student",
+  "Front End Developer",
+  "Full Stack Developer",
+];
 
 const AimatedText = () => {
   const [currentText, setCurrentText] = useState("");
   const [textIndex, setTextIndex] = useState(0);
-  const texts = ["Developer", "Engineer"];
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const fullText = texts[textIndex];
-    let charIndex = 0;
+    const handleTextAnimation = () => {
+      const fullText = names[textIndex];
 
-    setCurrentText("");
+      if (!isDeleting) {
+        // Add characters one by one
+        setCurrentText((prev) => fullText.substring(0, prev.length + 1));
 
-    const intervalId = setInterval(() => {
-      setCurrentText((prevText) => prevText + fullText[charIndex]);
-      charIndex++;
+        // Pause when the full name is displayed
+        if (currentText === fullText) {
+          setTimeout(() => setIsDeleting(true), 2000);
+        }
+      } else {
+        // Delete characters one by one
+        setCurrentText((prev) => fullText.substring(0, prev.length - 1));
 
-      if (charIndex === fullText.length) {
-        clearInterval(intervalId);
-        setTimeout(() => {
-          setTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
-        }, 1000);
+        // Move to the next name after fully deleting the current name
+        if (currentText === "") {
+          setIsDeleting(false);
+          setTextIndex((prev) => (prev + 1) % names.length);
+        }
       }
-    }, 200);
+    };
 
-    return () => clearInterval(intervalId);
-  }, [textIndex]);
+    const interval = setInterval(handleTextAnimation, 100);
+
+    return () => clearInterval(interval);
+  }, [currentText, isDeleting, textIndex]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        fontSize: "2em",
-        fontWeight: "bold",
-      }}
-      className=" w-full h-14 "
-    >
+    <div className=" text-xl sm:text-2xl font-bold mt-3 flex items-center ">
+      <motion.div key={currentText} className=" text-blue-500 ">
+        {currentText}
+      </motion.div>
+    </div>
+  );
+};
+
+const myIntro = [
+  "Specializing in frontend development using React.js and Next.js",
+  "With a strong foundation in JavaScript, HTML, CSS, and tools like Tailwind CSS, Firebase, and Redux, I build user-centric and scalable web applications",
+  "Currently pursuing a degree in Software Engineering at China West Normal University, I have developed over 20 real-world projects, including a hospital management system and a barber salon website",
+  "My recent work on a hospital management system reflects my ability to build secure, scalable applications with a focus on performance and user experience",
+  "Driven by a passion for learning, I am expanding my expertise in backend technologies like Node.js and MySQL while mastering animations with Framer Motion",
+  "I am enthusiastic about solving complex technical challenges, continuously learning, and applying cutting-edge technologies to deliver impactful solutions",
+];
+
+const introLines = myIntro.flatMap((para) => para.split(/(?<=[/])/g));
+
+const MyIntroduction = () => {
+  const [visibleLines, setVisibleLines] = useState(2); // Start with 2 lines visible
+
+  const handleReadMore = () => {
+    setVisibleLines((prev) => Math.min(prev + 1, introLines.length)); // Increment one line at a time
+  };
+
+  return (
+    <div className="my-intro lg:w-[85%] mt-5 sm:text-[16px] font-semibold text-slate-600 ">
       <motion.div
-        key={currentText} // Ensures that the animation restarts when the text changes
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        {currentText.split("").map((char, index) => (
-          <motion.span
+        {introLines.slice(0, visibleLines).map((line, index) => (
+          <motion.p
             key={index}
-            initial={{ opacity: 0, x: -10 }}
+            initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.1, type: "spring", stiffness: 100 }}
+            transition={{ delay: index * 0.2 }}
           >
-            {char}
-          </motion.span>
+            {line.trim()}
+          </motion.p>
         ))}
       </motion.div>
+      {visibleLines < introLines.length && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <ReadMoreBtn click={handleReadMore} text={"Read more"} />
+        </motion.div>
+      )}
     </div>
   );
 };
 
 export default function AboutProfile() {
   return (
-    <div className=" w-full sm:w-[80%] lg:w-full p-5 mx-auto mt-10 ">
-      <p className=" text-[14px] uppercase sm:text-[18px] lg:text-2xl font-serif text-slate-500 ">
-        <span>Hi&#44; I am a</span>
-        <span className="ml-2 ">{aboutData.profession}</span>
-      </p>
+    <div className=" w-full  mx-auto mt-10 ">
+      <div className="w-full ">
+        <p className=" text-[15px]  sm:text-2xl lg:text-2xl font-bold text-slate-500 ">
+          Hi&#44; I am a
+        </p>
 
-      {AimatedText()}
+        <AimatedText />
+      </div>
 
-      <p className=" text-xm lg:w-[70%] text-slate-500 font-semibold mt-5 ">
-        {aboutData.introduction}
-      </p>
+      <MyIntroduction />
 
       <div className=" flex gap-3 sm:gap-5 ">
         <HoverButton text={"View Projects"} />

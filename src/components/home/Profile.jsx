@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function Profile() {
   return (
-    <div className="relative sm:w-[40%] w-[80%] mx-auto bg-slate-100 h-[50vh] lg:mr-5 ">
+    <div className="relative sm:w-[50%] mt-5 lg:mt-0 w-[80%] mx-auto bg-slate-100 h-[50vh] lg:mr-5 ">
       {/* Profile Image */}
       <img
         src={profileImg}
